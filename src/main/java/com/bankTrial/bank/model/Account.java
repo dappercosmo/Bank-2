@@ -14,6 +14,17 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(unique = true)
+    private String accountNumber;
+    private double balance;
+    private String IFSC_code="FISHNI0123";
+
+    @Enumerated(EnumType.STRING)
+    private AccountType account_type;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -35,6 +46,14 @@ public class Account {
         return balance;
     }
 
+    public AccountType getAccount_type() {
+        return account_type;
+    }
+
+    public void setAccount_type(AccountType account_type) {
+        this.account_type = account_type;
+    }
+
     public void setBalance(double balance) {
         this.balance = balance;
     }
@@ -47,14 +66,6 @@ public class Account {
         this.IFSC_code = IFSC_code;
     }
 
-    public String getAccount_type() {
-        return account_type;
-    }
-
-    public void setAccount_type(String account_type) {
-        this.account_type = account_type;
-    }
-
     public User getUser() {
         return user;
     }
@@ -62,15 +73,5 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Column(unique = true)
-    private String accountNumber;
-    private double balance;
-    private String IFSC_code="FISHNI0123";
-    private String account_type="Savings";
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
 }

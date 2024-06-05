@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,15 +18,20 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-
-    @Column(unique = true)
     private String email;
-
     private String password;
-    private Boolean isActive;
+    private Boolean isActive=true;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Account account;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Account> account;
+
+    public List<Account> getAccount() {
+        return account;
+    }
+
+    public void setAccount(List<Account> account) {
+        this.account = account;
+    }
 
     public Long getId() {
         return id;
@@ -74,11 +81,5 @@ public class User {
         isActive = active;
     }
 
-    public Account getAccount() {
-        return account;
-    }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

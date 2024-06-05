@@ -4,5 +4,5 @@ import com.bankTrial.bank.model.User;
 import org.springframework.http.ResponseEntity;
 
 public interface UserService {
-    ResponseEntity<User> registerUser(User user);
+    User registerUser(String firstName, String lastName, String email, String password);
 }

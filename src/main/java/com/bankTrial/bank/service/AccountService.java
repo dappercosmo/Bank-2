@@ -6,5 +6,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface AccountService {
 
-    Account createAccount(User user);
+    Account createAccount(Long userId, String accountType);
 }
